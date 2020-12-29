@@ -5,4 +5,35 @@ api-version: '1.13'
 load: STARTUP
 authors: [TheViperShow]
 softdepend: [PlaceholderAPI]
-description: "An amazing plugin to monitor your hardware and server stats"
+description: "A plugin to monitor your hardware and server information"
+permissions:
+  systeminfo.commmands.cpuload:
+    description: Gets the load status of the CPU
+    default: op
+  systeminfo.commmands.devices:
+    description: Gets a list of system devices
+    default: op
+  systeminfo.commmands.disks:
+    description: Gets your system disks list
+    default: op
+  systeminfo.commmands.htop:
+    description: Shows a list of the processes running on the system
+    default: op
+  systeminfo.commmands.lscpu:
+    description: Gets information about the system processor(s)
+    default: op
+  systeminfo.commmands.sensors:
+    description: Gets information from the system sensors
+    default: op
+  systeminfo.commmands.speedtest:
+    description: Perform a network speedtest
+    default: op
+  systeminfo.commmands.help:
+    description: Main command of SystemInfo plugin
+    default: not op
+  systeminfo.commmands.uptime:
+    description: Gets the JVM uptime
+    default: op
+  systeminfo.commmands.vmstat:
+    description: Gets info about the system memory
+    default: op
