@@ -1,5 +1,6 @@
 package studio.thevipershow.systeminfo;
 
+import org.bukkit.configuration.file.FileConfiguration;
 import studio.thevipershow.systeminfo.api.SysteminfoPlaceholder;
 import studio.thevipershow.systeminfo.commands.register.Manager;
 import studio.thevipershow.systeminfo.csvwriter.CSVLogger;
@@ -25,6 +26,7 @@ public final class SystemInfo extends JavaPlugin {
     private PluginUpdater pluginUpdater;
     private JoinNotifyListener joinNotifyListener;
     private static SystemInfo instance;
+    private static FileConfiguration config;
     private SysteminfoPlaceholder systeminfoPlaceholder;
     private final static long EIGHT_HOURS_TICKS = 20L * 60L * 60L * 8L;
 
@@ -49,8 +51,16 @@ public final class SystemInfo extends JavaPlugin {
             return;
         }
         pluginManager.registerEvents(new GuiClickListener(), this);
-        csvLogger = CSVLogger.getInstance(SystemValues.getInstance(), this);
-        csvLogger.startLogging();
+
+        this.saveDefaultConfig();
+        config = this.getConfig();
+        if (config.getBoolean("csvlogging")) {
+            csvLogger = CSVLogger.getInstance(SystemValues.getInstance(), this);
+            csvLogger.startLogging();
+            getLogger().info("CSV logging is enabled");
+        } else {
+            getLogger().info("CSV logging is NOT enabled");
+        }
 
         joinNotifyListener = new JoinNotifyListener(this);
         pluginUpdater = PluginUpdater.getInstance(this);
